@@ -42,7 +42,11 @@ group :test do
     gem "culerity"
   else
     unless chiliproject
-      gem "capybara", "~>1.1.0"
+      if redmine_version_major >= 3
+        gem "capybara"
+      else
+        gem "capybara", "~>1.1.0"
+      end
       gem "poltergeist", "~>0.6.0"
     end
     gem "cucumber", "=1.1.0"
@@ -64,7 +68,11 @@ group :test do
     gem "rspec-rails", "=1.3.3"
   end
   if RUBY_VERSION >= "1.9"
-    gem "simplecov", "~>0.6"
+    if redmine_version_major >= 3
+      gem "simplecov", "~> 0.9.1"
+    else
+      gem "simplecov", "~>0.6"
+    end
   else
     gem "rcov",  "=0.9.11"
   end
